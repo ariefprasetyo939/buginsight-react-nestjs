@@ -1,0 +1,10 @@
+{
+  "name": "@bug-insight-react-nestjs/web-dashboard-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@bug-insight-react-nestjs/web-dashboard"
+    ]
+  }
+}
