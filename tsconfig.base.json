@@ -16,6 +16,10 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["development"]
+    "customConditions": ["development"],
+    "paths": {
+      "@prisma/client-custom": ["prisma/generated/prisma"],
+      "@prisma/service": ["prisma/prisma.service.ts"]
+    }
   }
 }

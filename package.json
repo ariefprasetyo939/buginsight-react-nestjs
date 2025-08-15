@@ -12,7 +12,15 @@
     "api-gateway:detail": "nx show project api-gateway",
     "api-gateway-e2e:detail": "nx show project api-gateway-e2e",
     "web-dashboard:detail": "nx show project web-dashboard",
-    "web-dashboard-e2e:detail": "nx show project web-dashboard-e2e"
+    "web-dashboard-e2e:detail": "nx show project web-dashboard-e2e",
+    "prisma:generate": "npx prisma generate --schema=prisma/schema.prisma",
+    "prisma:push": "npx prisma db push --schema=prisma/schema.prisma",
+    "prisma:migrate": "npx prisma migrate dev --schema=prisma/schema.prisma",
+    "prisma:studio": "npx prisma studio --schema=prisma/schema.prisma",
+    "prisma:seed": "npx prisma db seed --schema=prisma/schema.prisma",
+    "prisma:reset": "npx prisma migrate reset --force --schema=prisma/schema.prisma",
+    "prisma:rollback": "npx prisma migrate reset --force --schema=prisma/schema.prisma",
+    "prisma:deploy": "npx prisma migrate deploy --schema=prisma/schema.prisma"
   },
   "private": true,
   "devDependencies": {

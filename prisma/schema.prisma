@@ -6,10 +6,106 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "./generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  email String @unique@db.VarChar(255)
+  password String
+  role UserRole @default(DEVELOPER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relations
+  ownedProjects Project[] @relation("ProjectOwner")
+  reportedBugs BugReport[] @relation("BugReporter")
+  assignedBugs BugReport[] @relation("BugAssignee")
+  projectMembers ProjectMember[]
+}
+
+model Project {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relations
+  ownerId Int
+  owner User @relation("ProjectOwner", fields: [ownerId], references: [id])
+  bugs BugReport[]
+  projectMembers ProjectMember[]
+}
+
+model BugReport {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(255)
+  description String?
+  status BugStatus @default(OPEN)
+  priority BugPriority @default(MEDIUM)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relations
+  reporterId Int 
+  reporter User @relation("BugReporter", fields: [reporterId], references: [id])
+
+  assigneeId Int?
+  assignee User? @relation("BugAssignee", fields: [assigneeId], references: [id])
+
+  projectId Int
+  project Project @relation(fields: [projectId], references: [id])
+}
+
+model ProjectMember {
+  id Int @id @default(autoincrement())
+  role ProjectRole @default(DEVELOPER)
+  joinedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relation
+  projectId Int
+  project Project @relation(fields: [projectId], references: [id])
+
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+
+  //one user can be only once in one project
+  @@unique([projectId, userId])
+}
+
+//enums
+enum UserRole {
+  ADMIN
+  DEVELOPER
+  TESTER
+  VIEWER
+}
+
+enum ProjectRole {
+  PROJECT_OWNER
+  DEVELOPER
+  TESTER
+  VIEWER
+}
+
+enum BugStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum BugPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
 }
