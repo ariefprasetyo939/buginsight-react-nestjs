@@ -4,16 +4,10 @@
   "files": [],
   "references": [
     {
-      "path": "./api-gateway-e2e"
+      "path": "./libs"
     },
     {
-      "path": "./api-gateway"
-    },
-    {
-      "path": "./web-dashboard-e2e"
-    },
-    {
-      "path": "./web-dashboard"
+      "path": "./apps/web-dashboard"
     }
   ]
 }

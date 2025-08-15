@@ -1,17 +1,19 @@
 {
   "name": "@bug-insight-react-nestjs/source",
+  "author": "Arief Budi Prasetyo",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "start:parallel": "nx run-many --target=serve --projects=api-gateway,web-dashboard --parallel",
     "start:api-gateway": "nx serve api-gateway",
-    "start:api-gateway-e2e": "nx serve api-gateway-e2e",
+    "start:api-gateway-e2e": "nx e2e api-gateway-e2e",
     "start:web-dashboard": "nx serve web-dashboard",
-    "start:web-dashboard-e2e": "nx serve web-dashboard-e2e",
-    "api-gateway:detail": "nx show project @bug-insight-react-nestjs/api-gateway",
-    "api-gateway-e2e:detail": "nx show project @bug-insight-react-nestjs/api-gateway-e2e",
-    "web-dashboard:detail": "nx show project @bug-insight-react-nestjs/web-dashboard",
-    "web-dashboard-e2e:detail": "nx show project @bug-insight-react-nestjs/web-dashboard-e2e"
+    "start:web-dashboard-e2e": "nx e2e web-dashboard-e2e",
+
+    "api-gateway:detail": "nx show project api-gateway",
+    "api-gateway-e2e:detail": "nx show project api-gateway-e2e",
+    "web-dashboard:detail": "nx show project web-dashboard",
+    "web-dashboard-e2e:detail": "nx show project web-dashboard-e2e"
   },
   "private": true,
   "devDependencies": {
@@ -26,6 +28,7 @@
     "@nx/vite": "21.3.11",
     "@nx/web": "21.3.11",
     "@nx/webpack": "21.3.11",
+    "@prisma/client": "^6.14.0",
     "@swc-node/register": "~1.9.1",
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
@@ -49,6 +52,7 @@
     "nx": "21.3.11",
     "postcss": "8.4.38",
     "prettier": "^2.6.2",
+    "prisma": "^6.14.0",
     "tailwindcss": "3.4.3",
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
@@ -60,9 +64,8 @@
   },
   "workspaces": [
     "packages/*",
-    "api-gateway",
-    "api-gateway-e2e",
-    "web-dashboard"
+    "apps/*",
+    "libs/*"
   ],
   "dependencies": {
     "@nestjs/common": "^11.0.0",
