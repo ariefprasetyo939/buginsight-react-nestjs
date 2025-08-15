@@ -47,4 +47,6 @@ test-output
 
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
+
 prisma/generated/*
+.env
